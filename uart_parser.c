@@ -187,7 +187,7 @@ void UART_Feed_Buffer(UART_Parser_t *parser,
                    data[i],
                    (unsigned long)gap);
 
-            /* Re-feed the byte after parser reset */
+            //Re-send the byte after parser reset
             result = UART_Parser_Feed(parser,
                                       data[i],
                                       timestamps[i]);
@@ -232,7 +232,7 @@ int main(void)
 {
     UART_Parser_t parser;
 
-    /* Test 1: Clean valid UART frame */
+    // Clean valid UART frame
 
     const uint8_t test1_data[] =
         {
@@ -248,14 +248,14 @@ int main(void)
 
     UART_Parser_Init(&parser, DEFAULT_TIMEOUT_MS);
 
-    printf("\n===== TEST 1: VALID FRAME =====\n");
+    printf("\n 1: VALID FRAME \n");
 
     UART_Feed_Buffer(&parser,
                      test1_data,
                      test1_time,
                      test1_length);
 
-    /* Test 2: Timeout and Recovery */
+    //2: Timeout and Recovery 
 
     const uint8_t test2_data[] =
         {
@@ -272,14 +272,14 @@ int main(void)
 
     UART_Parser_Init(&parser, DEFAULT_TIMEOUT_MS);
 
-    printf("\n===== TEST 2: TIMEOUT AND RECOVERY =====\n");
+    printf("\n 2: TIMEOUT AND RECOVERY \n");
 
     UART_Feed_Buffer(&parser,
                      test2_data,
                      test2_time,
                      test2_length);
 
-    /* TEST 3: Two valid frames back-to-back */
+    // 3: Two valid frames back-to-back 
 
     const uint8_t test3_data[] =
         {
@@ -296,18 +296,18 @@ int main(void)
 
     UART_Parser_Init(&parser, DEFAULT_TIMEOUT_MS);
 
-    printf("\n===== TEST 3: BACK-TO-BACK FRAMES =====\n");
+    printf("\n 3: BACK-TO-BACK FRAMES \n");
 
     UART_Feed_Buffer(&parser,
                      test3_data,
                      test3_time,
                      test3_length);
 
-    /* TEST 4: Timeout Disabled */
+    //4: Timeout Disabled 
 
     UART_Parser_Init(&parser, 0U);
 
-    printf("\n===== TEST 4: TIMEOUT DISABLED =====\n");
+    printf("\n TEST 4: TIMEOUT DISABLED \n");
 
     UART_Feed_Buffer(&parser,
                      test2_data,
